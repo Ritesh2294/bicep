@@ -1,0 +1,27 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+  - job: Deploy
+    steps:
+      - task: AzureResourceManagerTemplateDeployment@3
+        displayName: "Deploy bicep files"
+        inputs:
+          deploymentScope: 'Resource Group'
+          azureResourceManagerConnection: 'devconnection'
+          subscriptionId: '02704606-216d-45c2-bd77-b51af0f62bae'
+          action: 'Create Or Update Resource Group'
+          resourceGroupName: 'NetworkWatcherRG'
+          location: 'East US'
+          templateLocation: 'Linked artifact'
+          csmFile: 'example.bicep'
+          csmParametersFile: 'example.parameters.json'
+          deploymentMode: 'Incremental'
