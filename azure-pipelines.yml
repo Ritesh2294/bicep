@@ -24,4 +24,4 @@ jobs:
           templateLocation: 'Linked artifact'
           csmFile: 'example.bicep'
           csmParametersFile: 'example.parameters.json'
-          deploymentMode: 'Incremental'
+          deploymentMode: Validation
